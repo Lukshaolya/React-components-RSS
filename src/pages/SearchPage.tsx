@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IData } from './types/interface';
 import './styles.css';
+// import Pagination from './components/Pagination';
 
 function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -8,15 +9,32 @@ function SearchPage() {
   const [data, setData] = useState<IData[]>([]);
   const [errorHandler, setErrorHandler] = useState(false);
   const [loading, isLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  // const totalItems = filteredData.length - 1;
 
   const handleGetData = async () => {
-    const response = await fetch('https://swapi.dev/api/planets/');
+    const response = await fetch(
+      `https://swapi.dev/api/planets/?page=${currentPage}&perPage=${itemsPerPage}`,
+    );
     const dataResponse = await response.json();
-    console.log(data);
-    setData(dataResponse.results);
-    setFilteredData(dataResponse.results);
+    console.log(dataResponse);
+    setData(dataResponse.results.slice(0, itemsPerPage));
+    setFilteredData(dataResponse.results.slice(0, itemsPerPage));
     isLoading(false);
-    console.log(dataResponse.results);
+    console.log(dataResponse.results.slice(0, itemsPerPage));
+  };
+
+  const handleChangeItemsPerPage = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    console.log(event.target.value);
+    const value = parseInt(event.target.value, 10);
+    setItemsPerPage(value);
+    setCurrentPage(1);
+    handleGetData();
+    setData(data.slice(0, itemsPerPage));
+    setFilteredData(filteredData.slice(0, itemsPerPage));
   };
 
   useEffect(() => {
@@ -66,21 +84,34 @@ function SearchPage() {
           Swith on Error
         </button>
       </div>
+      <div>
+        <select value={itemsPerPage} onChange={handleChangeItemsPerPage}>
+          <option value="5">5</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+      </div>
 
       {loading ? (
         <div className="loading_container">Loading</div>
       ) : (
         <div className="rearchResults_container">
           {filteredData.map((item) => (
-            <div key={item.name}>
+            <div className="item-card" key={item.name}>
               <p>{item.name}</p>
               <p>Population: {item.population}</p>
-              <p>Climate: {item.climate}</p>
-              <p>Terrain: {item.terrain}</p>
+              {/* <p>Climate: {item.climate}</p>
+              <p>Terrain: {item.terrain}</p> */}
             </div>
           ))}
         </div>
       )}
+
+      <div className="pagination_container">
+        {/* <Pagination
+            data={filteredData}
+        /> */}
+      </div>
     </div>
   );
 }
