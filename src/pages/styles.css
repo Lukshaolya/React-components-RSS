@@ -1,0 +1,42 @@
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+.seacrhBar_container {
+  height: 30vh;
+  /* background-color: black; */
+  display: flex;
+  width: 800px;
+  margin: 0 auto;
+  /* margin: 10%; */
+  padding: 10% 0 0 0;
+}
+
+
+.searchBar-btn {
+  height: 50px;
+  width: 120px;
+  background-color: grey;
+  color: white;
+  font-size: 1.2em;
+  margin: 0 10px;
+}
+
+.seacrhBar_container input {
+  height: 50px;
+  width: 400px;
+  border-radius: 5%;
+  background: white;
+  margin: 0 50px;
+}
+
+.loading_container {
+  font-size: 1.5em;
+  color: green;
+}
+
+.rearchResults_container {
+  color: white;
+}
