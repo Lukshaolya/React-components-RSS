@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IData } from './types/interface';
+import './styles.css';
 
 function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,28 +46,31 @@ function SearchPage() {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(event) => setSearchTerm(event.target.value)}
-      />
-      <button type="button" onClick={handleSearch}>
-        Search
-      </button>
-      <button
-        type="button"
-        className="search-button"
-        onClick={() => {
-          setErrorHandler(true);
-        }}
-      >
-        Swith on Error
-      </button>
+    <div className="container">
+      <div className="seacrhBar_container">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+        <button className="searchBar-btn" type="button" onClick={handleSearch}>
+          Search
+        </button>
+        <button
+          className="searchBar-btn"
+          type="button"
+          onClick={() => {
+            setErrorHandler(true);
+          }}
+        >
+          Swith on Error
+        </button>
+      </div>
+
       {loading ? (
-        <div>Loading</div>
+        <div className="loading_container">Loading</div>
       ) : (
-        <div>
+        <div className="rearchResults_container">
           {filteredData.map((item) => (
             <div key={item.name}>
               <p>{item.name}</p>
