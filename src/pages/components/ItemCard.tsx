@@ -31,7 +31,6 @@ function DetailedCard(props: { id: string | null }) {
     if (!currentItem && id) {
       handleGetData(id);
       isLoading(true);
-      // navigate(`?search=${id}`);
     }
   }, [id, currentItem, navigate]);
 

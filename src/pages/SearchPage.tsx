@@ -33,8 +33,7 @@ function SearchPage() {
     if (!currentPage) {
       navigate(`?page=1`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage, navigate]);
 
   const handleGetData = async (url: string) => {
     const response = await getApiResource(url);
@@ -45,8 +44,6 @@ function SearchPage() {
   };
 
   useEffect(() => {
-    console.log(API_PLANETS_BASIC + PAGE_PARAM + currentPage);
-    console.log(currentPage);
     handleGetData(PAGE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, cardsPerPage]);
