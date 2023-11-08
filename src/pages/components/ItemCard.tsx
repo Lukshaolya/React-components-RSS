@@ -49,12 +49,12 @@ function DetailedCard(props: { id: string | null }) {
         <div className="item-card__detailed" key={data.name}>
           <p>{data.name}</p>
           <p>Population: {data.population}</p>
-          <p>Climate{data.climate}</p>
-          <p>Diameter{data.diameter}</p>
-          <p>Gravity{data.gravity}</p>
-          <p>Climate{data.climate}</p>
-          <p>Terrain{data.terrain}</p>
-          <p>Surface_water{data.surface_water}</p>
+          <p>Climate: {data.climate}</p>
+          <p>Diameter: {data.diameter}</p>
+          <p>Gravity: {data.gravity}</p>
+          <p>Climate: {data.climate}</p>
+          <p>Terrain: {data.terrain}</p>
+          <p>Surface_water: {data.surface_water}</p>
           <button className="close_btn" type="button" onClick={handleClose}>
             Close
           </button>
