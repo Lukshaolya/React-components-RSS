@@ -37,8 +37,8 @@ function DetailedCard(props: { id: string | null }) {
 
   if (data) {
     return (
-      <div className="rearchResults_container">
-        <div className="item-card" key={data.name}>
+      <div className="detailedCard_container">
+        <div className="item-card__detailed" key={data.name}>
           <p>{data.name}</p>
           <p>Population: {data.population}</p>
           <p>Climate{data.climate}</p>

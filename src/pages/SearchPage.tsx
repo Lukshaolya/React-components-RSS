@@ -25,7 +25,7 @@ function SearchPage() {
   const navigate = useNavigate();
 
   const searchParams = useQueryParams();
-  const currentPage = searchParams.get('search');
+  const currentPage = searchParams.get('page');
   const PAGE = API_PLANETS_BASIC + PAGE_PARAM + currentPage;
   const totalItems = 60;
 
@@ -116,47 +116,50 @@ function SearchPage() {
           Swith on Error
         </button>
 
-        <select value={cardsPerPage} onChange={handleChange}>
+        <select
+          className="select_container"
+          value={cardsPerPage}
+          onChange={handleChange}
+        >
           <option value={5}>5</option>
           <option value={8}>8</option>
           <option value={10}>10</option>
         </select>
       </div>
 
-      {loading ? (
-        <div className="loading_container">Loading</div>
-      ) : (
-        <div className="rearchResults_container">
-          {filteredData.map((item) => (
-            <div className="item-card" key={item.name}>
-              <p>{item.name}</p>
-              <p>Population: {item.population}</p>
-              {/* <p>{item.url}</p>
-              <p>{getPeopleId(item.url)}</p> */}
-              <button
-                type="button"
-                onClick={() => handleOpenCard(getPeopleId(item.url))}
-              >
-                More
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {clicked ? <DetailedCard id={detailedID} /> : ''}
-
       <div className="pagination_container">
-        <div className="pagination_cont">
-          <Pagination
-            currentPage={+(currentPage || 1)}
-            totalItems={totalItems}
-            cardsPerPage={cardsPerPage}
-            paginate={paginate}
-            prev={handlePrev}
-            next={handleNext}
-          />
-        </div>
+        <Pagination
+          currentPage={+(currentPage || 1)}
+          totalItems={totalItems}
+          cardsPerPage={cardsPerPage}
+          paginate={paginate}
+          prev={handlePrev}
+          next={handleNext}
+        />
+      </div>
+
+      <div className="catalog_container">
+        {loading ? (
+          <div className="loading_container">Loading...</div>
+        ) : (
+          <div className="rearchResults_container">
+            {filteredData.map((item) => (
+              <div className="item-card" key={item.name}>
+                <p>{item.name}</p>
+                <p>Population: {item.population}</p>
+                <button
+                  type="button"
+                  className="item-card_btn"
+                  onClick={() => handleOpenCard(getPeopleId(item.url))}
+                >
+                  More
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {clicked ? <DetailedCard id={detailedID} /> : ''}
       </div>
     </div>
   );

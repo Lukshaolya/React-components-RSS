@@ -6,13 +6,7 @@ function Pagination(props: {
   prev: () => void;
   next: () => void;
 }) {
-  const { currentPage, 
-    totalItems,
-     cardsPerPage,
-      paginate, 
-      prev, 
-      next } =
-    props;
+  const { currentPage, totalItems, cardsPerPage, paginate, prev, next } = props;
   const pageNumber = [];
 
   for (let i = 1; i <= totalItems / cardsPerPage + 1; i += 1) {
@@ -41,7 +35,6 @@ function Pagination(props: {
           {page}
         </button>
       ))}
-      ;
       <button
         type="button"
         disabled={currentPage === pageNumber.length}
